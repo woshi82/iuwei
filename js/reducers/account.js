@@ -2,12 +2,11 @@
  * @Author: zengyanling
  * @Date: 2017-04-04 17:28:27
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-04 18:41:47
+ * @Last Modified time: 2017-04-04 22:16:53
  */
 import { combineReducers } from 'redux';
 import { commonRequest } from './commonHandler';
 import {
-	LOGOUT,
 	USER,
 	LOGINSAGAS,
 } from '../actions/types';
@@ -34,12 +33,11 @@ const user = (state = initialUserState, action) => {
 		}
     action.isLogin && (data.isLogin = action.isLogin);
 
-    if (action.username){
-      return {
-        ...state,
-        ...data,
-      };
-    }
+    console.log(data)
+    return {
+      ...state,
+      ...data,
+    };
 	}
 	return state;
 };
@@ -50,8 +48,8 @@ export default combineReducers({
 	loginSagas: commonRequest(LOGINSAGAS),
 });
 
-export function getLoginInfo() {
+export function getLoginInfo(state) {
   return {
-    username: this.state.account.loginSagas.username,
+    username: state.account.loginSagas.username,
   };
 }

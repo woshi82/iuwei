@@ -24,9 +24,9 @@ class LoginRedux extends Component {
 		});
   }
 	loginHandler = () => {
-    console.log(this.username._lastNativeText);
     this.props.loginReq({
-      username: this.username._lastNativeText
+      username: this.username._lastNativeText,
+      password: this.password._lastNativeText
     });
 	}
 	render() {

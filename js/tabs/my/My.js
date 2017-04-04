@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-04 16:13:30
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-04 18:28:34
+ * @Last Modified time: 2017-04-04 22:29:03
  */
 
 import React, { Component } from 'react';
@@ -39,14 +39,16 @@ class My extends Component {
           <Image style={styles.avatar} source={userData.isLogin ? require('./img/avatar.jpg') : require('./img/avatar.png')}/>
           <Text style={styles.name}>{userData.info.username}</Text>
         </View>
-        <TouchableOpacity style={styles.btn} onPress={this.logoutHandler}>
-          <Text style={styles.btnText}>退出登录</Text>
-          <Image source={require('./img/arrow-grey.png')}/>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={this.loginHandler}>
-          <Text style={styles.btnText}>登录</Text>
-          <Image source={require('./img/arrow-grey.png')}/>
-        </TouchableOpacity>
+        {userData.isLogin ?
+          <TouchableOpacity style={styles.btn} onPress={this.logoutHandler}>
+            <Text style={styles.btnText}>退出登录</Text>
+            <Image source={require('./img/arrow-grey.png')}/>
+          </TouchableOpacity> :
+          <TouchableOpacity style={styles.btn} onPress={this.loginHandler}>
+            <Text style={styles.btnText}>登录</Text>
+            <Image source={require('./img/arrow-grey.png')}/>
+          </TouchableOpacity>
+        }
       </View>
     );
   }

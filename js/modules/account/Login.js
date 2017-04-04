@@ -12,8 +12,11 @@ import { connect } from 'react-redux';
 import { loginSagasAc } from '../../actions';
 import Header from '../../common/Header';
 import TabsView from '../../tabs/TabsView';
+import formSubscription from '../../common/formSubscription';
+import Input from '../../common/Input';
+import Error from '../../common/Error';
 
-class LoginSagas extends Component {
+class Login extends Component {
 	componentWillReceiveProps (nextProps) {
     nextProps.userData.isLogin && this.props.navigator.push({
 			name: 'TabsView',
@@ -24,18 +27,70 @@ class LoginSagas extends Component {
 		});
   }
 	loginHandler = () => {
-    this.props.loginReq({
-      username: this.username._lastNativeText,
-      password: this.password._lastNativeText
+    const { formValidate, loginReq } = this.props;
+    const values = formValidate.values;
+    loginReq({
+      // username: this.username._lastNativeText,
+      username: values.username,
+      password: values.password
     });
 	}
+  renderForm = () => {
+    return (
+			<View>
+				<Input
+					name="user_name"
+					validations={[
+					{
+						validator: 'isRequired',
+						message: '请输入用户名',
+					}, {
+						validator: 'isLength',
+						arguments: [3, 10],
+						message: '用户名为{ARGS[0]}到{ARGS[1]}位字符',
+					}]}
+					placeholder="请输入用户名"
+					returnKeyType="next"
+				/>
+				<Input
+					name="password"
+					validations={[
+					{
+						validator: 'isRequired',
+						message: '请输入密码',
+					}, {
+						validator: 'isLength',
+						arguments: [2, 10],
+						message: '请输入 {ARGS[0]} 到 {ARGS[1]} 位密码',
+					}]}
+					placeholder="请输入密码"
+					password
+					secureTextEntry
+					enablesReturnKeyAutomatically  //未输入时键盘的确定按钮不能点
+					returnKeyType="done"
+					blurOnSubmit   // 点击键盘的确定 收起键盘
+					onSubmitEditing={() => {this.customSubmit(this.props.formValidate.values); }}
+					/>
+			</View>
+		);
+  }
 	render() {
+    const { formSubmit, valid, error, setFormState } = this.props;
 		return (
 			<View style={styles.container}>
         <Image style={styles.bg} />
         <Header navigator={this.props.navigator} />
+        <Error
+          error={error}
+          animateEnd={() => {
+            setFormState({
+              error: '',
+            });
+          }}
+        />
         <Text style={styles.name}>iuwei.</Text>
-        <TextInput
+        {this.renderForm()}
+        {/*<TextInput
           style={styles.input}
           ref={(r) => {this.username = r;}}
           placeholder="用户名"
@@ -50,11 +105,17 @@ class LoginSagas extends Component {
           enablesReturnKeyAutomatically  //未输入时键盘的确定按钮不能点
 					returnKeyType="done"
 					blurOnSubmit   // 点击键盘的确定 收起键盘
-					onSubmitEditing={() => {this.loginHandler() }}
-        />
-        <TouchableOpacity style={styles.btn} onPress={this.loginHandler}>
-          <Text style={styles.btnText}>登录</Text>
-        </TouchableOpacity>
+					onSubmitEditing={() => {formSubmit(this.loginHandler)}}
+        />*/}
+        {valid ? 
+          <TouchableOpacity style={styles.btn} onPress={formSubmit(this.loginHandler)}>
+            <Text style={styles.btnText}>登录</Text>
+          </TouchableOpacity> :
+          <TouchableOpacity style={[styles.btn, styles.btnInactive]}>
+            <Text style={styles.btnText}>登录</Text>
+          </TouchableOpacity>
+          
+        }
         <TouchableOpacity>
           <Text style={styles.forget}>忘记密码?</Text>
         </TouchableOpacity>
@@ -103,6 +164,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: '#fe4b00',
   },
+  btnInactive: {
+    backgroundColor: '#f8f8f8',
+
+  },
   btnText: {
     lineHeight: 46,
     textAlign: 'center',
@@ -115,7 +180,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
+const connectLogin = connect(
   (state) => {
     return {
       userData: state.account.user,
@@ -127,4 +192,5 @@ export default connect(
         dispatch(loginSagasAc.request(obj));
       },
     };
-  })(LoginSagas);
+  })(Login);
+  export default formSubscription('login')(connectLogin);

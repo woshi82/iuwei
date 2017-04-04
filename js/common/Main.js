@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import LoginLayout from '../modules/account/LoginLayout';
 import LoginRedux from '../modules/account/LoginRedux';
+import LoginSagas from '../modules/account/LoginSagas';
+import Login from '../modules/account/Login';
 
 export default class Main extends Component {
   pressButton = (name, component, params = {}) => {
@@ -29,10 +31,10 @@ export default class Main extends Component {
         <TouchableOpacity style={styles.btn} onPress={() => {this.pressButton('LoginRedux', LoginRedux);}}>
           <Text style={styles.btnText}>LoginRedux</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={() => {this.pressButton('LoginLayout', LoginLayout);}}>
+        <TouchableOpacity style={styles.btn} onPress={() => {this.pressButton('LoginSagas', LoginSagas);}}>
           <Text style={styles.btnText}>LoginSagas</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn} onPress={() => {this.pressButton('LoginLayout', LoginLayout);}}>
+        <TouchableOpacity style={styles.btn} onPress={() => {this.pressButton('Login', Login);}}>
           <Text style={styles.btnText}>LoginVerify</Text>
         </TouchableOpacity>
       </View>

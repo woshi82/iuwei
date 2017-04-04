@@ -2,7 +2,7 @@
  * @Author: zengyanling 
  * @Date: 2017-04-03 21:29:08 
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-04 18:33:50
+ * @Last Modified time: 2017-04-04 21:50:06
  */
 
 const REQUEST = 'REQUEST';

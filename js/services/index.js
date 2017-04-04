@@ -2,10 +2,10 @@
  * @Author: zengyanling 
  * @Date: 2017-04-03 21:37:08 
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-04 18:45:39
+ * @Last Modified time: 2017-04-04 22:24:37
  */
 
-const API_ROOT = 'http://127.0.0.1/api/';
+const API_ROOT = 'http://127.0.0.1:2000/api/';
 
 
 function callApi(endpoint, postParam, method) {
@@ -75,4 +75,4 @@ function callApi(endpoint, postParam, method) {
 		);
 }
 
-export const fetchLogin = (postParam, token) => callApi(`login`, postParam);
+export const fetchLogin = (postParam, token) => callApi(`login?`, postParam, 'GET');

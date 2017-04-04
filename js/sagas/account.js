@@ -11,7 +11,7 @@ import {
 import {
 	user,
 	loginSagasAc,
-	networkIndicator,
+	// networkIndicator,
 } from '../actions';
 import {
 	getLoginInfo,

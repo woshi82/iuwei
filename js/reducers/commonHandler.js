@@ -23,7 +23,7 @@ export const commonRequest = (reducerName) => {
 					...state,
 					isFetching: false,
 					status: error.status || -1, // -1 代表本地请求错误
-					error: error.status ? error.error : error,
+					// error: error.status ? error.error : error,
 					message:  error.status ? error.message : error,
 				};
 			default:
