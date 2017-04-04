@@ -4,7 +4,18 @@
 
 import { combineReducers } from 'redux';
 import { networkIndicator } from './networkIndicator';
+import { default as account } from './account';
 
-module.exports = combineReducers({
-	networkIndicator: networkIndicator,
+const appReducer = combineReducers({
+  networkIndicator,
+	account,
 });
+
+export default (state, action) => {
+  if (action.type === 'LOGOUT') {
+		console.log(11223);
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};

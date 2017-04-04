@@ -6,12 +6,11 @@ import { put, call, select, takeLatest } from 'redux-saga/effects';
 import * as api from '../services';
 import { fetchEntity } from './commonHandler';
 import {
-	LOGIN,
+	LOGINSAGAS,
 } from '../actions/types';
 import {
 	user,
-	// logout,
-	// loginAc,
+	loginSagasAc,
 	networkIndicator,
 } from '../actions';
 import {
@@ -20,14 +19,14 @@ import {
 
 function* loadLogin() {
 	const params = yield select(getLoginInfo);
-	yield call(fetchEntity, loginAc, api.fetchLogin, params, function* (response) {
-		yield put(user({ isLogin: true, info: response.data.info, token: response.data.token }));
-		yield put(loginAc.success());
+	yield call(fetchEntity, loginSagasAc, api.fetchLogin, params, function* (response) {
+		yield put(user({ isLogin: true, info: response.data.info}));
+		yield put(loginSagasAc.success());
 	});
 }
 
 export default function* watchAccount() {
-	yield takeLatest(LOGIN.REQUEST, loadLogin);
+	yield takeLatest(LOGINSAGAS.REQUEST, loadLogin);
 }
 
 

@@ -3,7 +3,7 @@
  * @Author: zengyanling 
  * @Date: 2017-04-03 21:26:42 
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-03 22:57:58
+ * @Last Modified time: 2017-04-04 17:57:00
  */
 
 import React, { Component  } from 'react';
@@ -24,7 +24,6 @@ class App extends Component {
   componentDidMount() {
   }
   render() {
-    console.log(111);
     return (
       <View style={styles.container}>
           <StatusBar

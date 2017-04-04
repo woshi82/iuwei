@@ -2,10 +2,10 @@
  * @Author: zengyanling 
  * @Date: 2017-04-03 21:37:08 
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-03 21:39:37
+ * @Last Modified time: 2017-04-04 18:45:39
  */
 
-const API_ROOT = 'http://rg.test.biketo.com/api/v1/';
+const API_ROOT = 'http://127.0.0.1/api/';
 
 
 function callApi(endpoint, postParam, method) {
@@ -75,38 +75,4 @@ function callApi(endpoint, postParam, method) {
 		);
 }
 
-function callImage(endpoint, postParam, method) {
-	const fullUrl = (endpoint.indexOf(API_ROOT) === -1) ? API_ROOT + endpoint : endpoint;
-	// console.log('postParam!!!!!', postParam)
-	const formData = new FormData();
-	formData.append('file', { type: 'image/*', name: 'file', uri: postParam.file });
-
-	const options = {
-		headers: {
-			// 'Content-Type': 'multipart/form-data; boundary=6ff46e0b6b5148d984f148b6542e5a5d',
-		},
-		method: method || 'POST',
-		body: formData,
-	};
-	console.log('请求类型', method || 'POST');
-	console.log('请求链接22', fullUrl);
-	console.log('请求参数', formData);
-	return fetch(fullUrl, options)
-		.then(response =>
-			response.json().then(json => ({ json, response }))
-		).then(({ json, response }) => {
-
-			console.log('返回值', json);
-			if (!response.ok || json.status !== 0) {
-				return Promise.reject(json);
-			}
-			return json;
-		})
-		.then(
-			response => ({ response }),
-			error => ({ error }),
-		);
-}
-
-
-export const fetchLogin = (postParam, token) => callApi(`login/oauth?access_token=${token}`, postParam);
+export const fetchLogin = (postParam, token) => callApi(`login`, postParam);
