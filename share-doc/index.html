@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>react-native share</title>
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="lib/css/myself.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section>
+                <h2 id="title">react-native构建原生应用</h2>
+                <!-- <p class="fragment" data-fragment-index="0" style="font-size: 24px;line-height: 40px;">程序猿也可以做一些美丽的事</p> -->
+            </section>
+            <section>
+                <h3>目录</h3>
+                <div style="width: 360px; margin: 0 auto; text-align: left;">
+                    <p class="dot-left">什么是react-native</p>
+                    <!--<p class="dot-left">搭建开发环境</p>-->
+                    <p class="dot-left">实例演示</p>
+                    <p class="dot-left">构建应用的技术栈</p>
+                    <!--<p class="dot-left">一个简单的静态页面</p>  引入 简单的redux-->
+                    <p class="dot-left">文件结构</p>
+                    <!--<p class="dot-left">构建项目框架的思路</p>-->
+                    <p class="dot-left">redux数据流</p>
+                    <p class="dot-left">react的组件化思维</p>
+                    <!--<p class="dot-left">构建原生应用</p>-->
+                    <!--<p class="dot-left">react-native的利弊</p>-->
+                </div>
+            </section>
+            <section>
+                <section>
+                    <h2>react-native</h2>
+                    <!--TODO: 基于react构建手机应用的框架 封装了常用的手机端原生接口、组件-->
+                    <!--<p>基于react构建手机应用的框架</p>
+                    <p>封装了常用的手机端原生接口、组件</p>-->
+                </section>
+                <section>
+                    <h2>搭建开发环境</h2>
+                    <p>http://facebook.github.io/react-native/docs</p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>实例演示</h2>
+                    <!-- TODO: 登录登出数据流、hoc表单验证-->
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>构建应用的技术栈</h2>
+                </section>
+                <section style="top: 0;">
+                    <img width="550" style="border: 0;margin: 0 10px;" data-src="./imgs/tech.png">
+                </section>
+                <section>
+                    <h2>react</h2>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/react.png">
+                    <p>看例子</p>
+                </section>
+                <section>
+                    <h2>redux</h2>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/redux-flow.png">
+                    <p>看例子</p>
+                    <!-- TODO: middleware(例子、引入柯里化)-->
+                    <p></p>
+                </section>
+                <section>
+                    <h2>redux-saga</h2>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>文件结构</h2>
+                    <p>如图</p>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>redux数据流</h2>
+                </section>
+                <section>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/login-store.png">
+                </section>
+                <section>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/login-flow.png">
+                </section>
+            </section>
+
+            <section>
+                <section>
+
+                    <h2>react的组件化思维之一</h2>
+                    <p>HOC</p>
+                </section>
+                <section>
+                    <h2>需求</h2>
+                    <div style="width: 400px; margin: 20px auto; text-align: left;">
+                    <p>1. 实时验证</p>
+                    <!--TODO: 显示哪个input的错误根据用户操作显示、加入后台的返回错误-->
+                    <p>2. 自定义错误的显示</p>
+                    <!--TODO:  phone、email、图片验证……-->
+                    <p>3. 自定义配置表单验证</p>
+                    </div>
+                </section>
+                <section>
+                    <h2>redux-form</h2>
+                    <p>reduxForm</p>
+                    <p>field</p>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h2>react-native的利弊</h2>
+                </section>
+                <section>
+                    <div style="width: 800px; margin: 0 auto; text-align: left;">
+                    <!--TODO: lineHeight 基准点不一样可能经常要借助 includeFontPadding: false ， textAlignVertical: 'top',或者直接不用这个属性。-->
+                    <p>1. 布局的兼容性，特别是android端机型不同、分辨率不同</p>
+                    <!--TODO: IOS和android上用的属性或API可能会不同：onkeypress、letterspace,如果一定要用，需要修改源码，并编译。有一些原生功能也可以查找第三方插件：camera、-->
+                    <p>2. 对原生的API支持还有限</p> 
+                    <p>3. 动画是略卡顿的，有些机型表现不一样，需要深入的优化。</p>
+                    <!--TODO: ：打包、打包配置、写一些自定义的原生功能-->
+                    <p>4. 还是需要掌握一些原生的东西</p>
+                    </div>
+                </section>
+                <section>
+                    <div style="width: 800px; margin: 0 auto; text-align: left;">
+                    <p>1. 有JS的功底就可以写APP，而且可以兼容IOS、Android,很是酷炫。</p>
+                    <p>2. 具有React的优势，数据驱动，高度组件化，很好的管理应用数据，性能好。</p>
+                    <!--TODO: ：编写应用中遇到的问题，大多都可以到github、stackoverflow上找到解决方案，连一些原生的东西都很多-->
+                    <p>3. 生态圈够大，维护者很多</p>
+                    </div>
+                </section>
+            </section>
+
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        width: 1200,
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [{
+            src: 'lib/js/classList.js',
+            condition: function() {
+                return !document.body.classList;
+            }
+        }, {
+            src: 'plugin/markdown/marked.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/markdown/markdown.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        }, {
+            src: 'plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        }, {
+            src: 'plugin/zoom-js/zoom.js',
+            async: true
+        }, {
+            src: 'plugin/notes/notes.js',
+            async: true
+        }]
+    });
+    </script>
+</body>
+
+</html>
