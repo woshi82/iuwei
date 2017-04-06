@@ -15,13 +15,27 @@ import TabsView from '../../tabs/TabsView';
 
 class LoginSagas extends Component {
 	componentWillReceiveProps (nextProps) {
-    nextProps.userData.isLogin && this.props.navigator.push({
-			name: 'TabsView',
-			component: TabsView,
-      params: {
-        iTab: 1,
+    const { loginData } = nextProps;
+    if (this.props.loginData.isFetching && loginData.isFetching){
+      if (loginData.status === 0){
+        nextProps.userData.isLogin && this.props.navigator.push({
+          name: 'TabsView',
+          component: TabsView,
+          params: {
+            iTab: 1,
+          }
+        });
+      } else if (loginData.status === -1){
+        this.setState({
+          error: '网络错误',
+        });
+      } else {
+        this.setState({
+          error: loginData.message,
+        });
       }
-		});
+
+    }
   }
 	loginHandler = () => {
     this.props.loginReq({
@@ -119,6 +133,7 @@ export default connect(
   (state) => {
     return {
       userData: state.account.user,
+      loginData: state.account.login,
     };
   },
   (dispatch) => {
