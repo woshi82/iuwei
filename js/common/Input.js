@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 
-		marginTop: 10,
+		// marginTop: 10,
 		// borderColor: '#edeff0',
 		borderBottomWidth: 1 / PixelRatio.get(),
     borderBottomColor: 'rgba(97, 95, 95,0.7)',
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 		height: 48,
 		paddingTop: 10,
 		paddingBottom: 10,
+		paddingLeft: 10,
 		fontSize: 14,
 		flex: 1,
 	},
@@ -77,3 +78,53 @@ const styles = StyleSheet.create({
 });
 
 module.exports = fieldSubscription(Input);
+
+////////////////////hoc4.png
+// formSubscription
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { reduxForm } from 'redux-form';
+const formSubscription = formKey => WrappedComponent => {
+	class formCommon extends Component {
+		constructor(props){
+			super(props);
+			this.state = {
+				error: '',
+			};
+		}
+		validate = (key) => {
+      // 处理 this.state.error
+		}
+		submit = (submitFn) => {
+			if (this.validate()){
+				const { handleSubmit } = this.props;
+				// 进行表单验证
+				handleSubmit(submitFn)();
+			}
+		}
+		render() {
+			return (<WrappedComponent
+				setFormState={this.setFormState}
+				formSubmit={this.submit.bind(this)}
+				validateHandler={this.validate}
+				{...this.props}
+				{...this.state}
+			/>));
+		}
+	}
+	const connectForm = connect(
+		state => {
+			const formValidate = state.form[formKey] || {};
+			return {
+				formValidate,
+			};
+},
+	)(formCommon);
+	return reduxForm({
+		form: formKey,
+	})(connectForm);
+};
+export default formSubscription; 
+
+
+

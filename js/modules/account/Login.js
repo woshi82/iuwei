@@ -5,7 +5,6 @@ import {
 	Text,
 	TouchableOpacity,
 	Image,
-	TextInput,
 	PixelRatio,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -39,7 +38,7 @@ class Login extends Component {
     return (
 			<View>
 				<Input
-					name="user_name"
+					name="username"
 					validations={[
 					{
 						validator: 'isRequired',
@@ -90,32 +89,12 @@ class Login extends Component {
         />
         <Text style={styles.name}>iuwei.</Text>
         {this.renderForm()}
-        {/*<TextInput
-          style={styles.input}
-          ref={(r) => {this.username = r;}}
-          placeholder="用户名"
-          autoFocus
-          returnKeyType="next"
-          onSubmitEditing={() => {this.password.focus();}}
-        />
-        <TextInput
-          style={styles.input}
-          ref={(r) => {this.password = r;}}
-          placeholder="密码"
-          enablesReturnKeyAutomatically  //未输入时键盘的确定按钮不能点
-					returnKeyType="done"
-					blurOnSubmit   // 点击键盘的确定 收起键盘
-					onSubmitEditing={() => {formSubmit(this.loginHandler)}}
-        />*/}
-        {valid ? 
-          <TouchableOpacity style={styles.btn} onPress={formSubmit(this.loginHandler)}>
-            <Text style={styles.btnText}>登录</Text>
-          </TouchableOpacity> :
-          <TouchableOpacity style={[styles.btn, styles.btnInactive]}>
+          <TouchableOpacity style={[styles.btn, !valid && styles.btnInactive]} onPress={() => {formSubmit(this.loginHandler)}}>
             <Text style={styles.btnText}>登录</Text>
           </TouchableOpacity>
           
-        }
+          
+        
         <TouchableOpacity>
           <Text style={styles.forget}>忘记密码?</Text>
         </TouchableOpacity>
@@ -165,7 +144,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fe4b00',
   },
   btnInactive: {
-    backgroundColor: '#f8f8f8',
+    backgroundColor: '#999',
 
   },
   btnText: {

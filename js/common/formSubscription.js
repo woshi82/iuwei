@@ -42,39 +42,12 @@ const formSubscription = formKey => WrappedComponent => {
 			return valid;
 		}
 		/**
-		 * 设置后台返回的错误信息 FIXME: 此处方法可以优化
+		 * 设置后台返回的错误信息
 		 */
 		setFormState = obj => {
 			this.setState(obj);
 		}
-		/**
-		 * 确认密码验证 FIXME: 此处方法可以优化
-		 */
-		passwordConfirmValide = (v) => {
-			const { password } = this.props.formValidate.values || {};
-			if (v === password) {
-				return true;
-			}
-			return false;
-		}
-		/**
-		 * 图片验证 FIXME: 此处方法可以优化
-		 */
-		selectPicSizeValide = (v) => {
-			if (v != -1) {
-				return true;
-			}
-			return false;
-		}
-		/**
-		 * 验证码验证（没用）
-		 */
-		seccodeValide = (v) => {
-			if (v == this.state.seccode) {
-				return true;
-			}
-			return false;
-		}
+
 		submit = (submitFn) => {
 			this.validate();
 			const { handleSubmit } = this.props;
@@ -84,9 +57,6 @@ const formSubscription = formKey => WrappedComponent => {
 		render() {
 			return (<WrappedComponent
 				setFormState={this.setFormState}
-				seccodeValide={this.seccodeValide}
-				passwordConfirmValide={this.passwordConfirmValide}
-				selectPicSizeValide={this.selectPicSizeValide}
 				formSubmit={this.submit.bind(this)}
 				validateHandler={this.validate}
 				{...this.props}
