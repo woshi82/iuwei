@@ -33,8 +33,13 @@
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
             <section>
-                <h2 id="title">react-native构建原生应用</h2>
-                <!-- <p class="fragment" data-fragment-index="0" style="font-size: 24px;line-height: 40px;">程序猿也可以做一些美丽的事</p> -->
+                <section>
+                    <h2 id="title">用react-native构建原生应用</h2>
+                </section>
+                <section>
+                    <p>Q: 前端领域，还有什么框架可以构建原生应用？</p>   
+                    <!--weex ionic 性能 > 本质-->
+                </section>
             </section>
             <section>
                 <h3>目录</h3>
@@ -87,66 +92,12 @@
                     <!--<p>看完整的例子</p>-->
                 </section>
                 <section>
-                    <pre>
-        <code  contenteditable style="max-height: 630px;">
-            import React, { Component } from 'react';
-            import {
-                StyleSheet,
-                View,
-                Text,
-                TouchableOpacity,
-                Image,
-                TextInput,
-                PixelRatio,
-            } from 'react-native';
-            import Header from '../../common/Header';
-
-            export default class LoginLayout extends Component {
-                loginHandler = () => {
-                }
-                render() {
-                    return (
-                        <View style={styles.container}>
-                            ...
-                            <Text style={styles.name}>iuwei.</Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder="用户名"
-                                autoFocus
-                                returnKeyType="next"
-                                onSubmitEditing={() => {this.password.focus();}}
-                            />
-                            <TextInput
-                                style={styles.input}
-                                ref={(r) => {this.password = r;}}
-                                placeholder="密码"
-                                enablesReturnKeyAutomatically  //未输入时键盘的确定按钮不能点
-                                returnKeyType="done"
-                                blurOnSubmit   // 点击键盘的确定 收起键盘
-                                onSubmitEditing={() => {this.loginHandler(); }}
-                            />
-                            <TouchableOpacity style={styles.btn} onPress={this.loginHandler}>
-                            <Text style={styles.btnText}>登录</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity>
-                            <Text style={styles.forget}>忘记密码?</Text>
-                            </TouchableOpacity>
-                        </View>
-                    );
-                }
-            }
-
-            const styles = StyleSheet.create({
-                container: {
-                    flex: 1,
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    paddingTop: 100,
-                },
-                ...
-            });
-        </code>
-                    </pre>
+                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/react1.png">
+                    
+                </section>
+                <section>
+                    <p>Q: 怎样理解MVVM?</p>
+                    
                 </section>
             </section>
             <section>
@@ -166,15 +117,12 @@
                         username: this.username._lastNativeText
                         password: this.password._lastNativeText
                     }))
-
                     <!--action.js-->
                     export const loginReduxAc = data => action(USER, { ...data });
-
                     <!--action creator-->
                     export const action = (type, payload = {}) => {
                         return { type, ...payload };
                     };
-
                     <!-- reducer -->
                     (state = {islogin: false, info: {}}, action) => {
                         if (action.type === USER){
@@ -186,7 +134,6 @@
                             }                  
                         }
                     }
-
                     <!-- store-->
                     store = createStore(reducer)
                     </code>
@@ -230,45 +177,9 @@
                 </section>
                 <section>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/middleware-flow.png">
-                    <p></p>
                 </section>
                 <section>
-                    <pre>
-                        <code contenteditable style="max-height: 630px;">
-                        function n1(store){
-                            return function(next){
-                                return function(action) {
-                                    console.log('n1 begin');
-                                    next(action);
-                                    console.log('n1 end');
-                                }	
-                            }
-                        }
-                        function n2(store){
-                            return function(next){
-                                return function(action) {
-                                    console.log('n2 begin');
-                                    next(action);
-                                    console.log('n2 end');
-                                }	
-                            }	
-                        }
-
-                        function applyMiddlewareSimilar(store, middlewares) {
-                            middlewares = middlewares.slice()
-                            middlewares.reverse()
-
-                            const dispatch = store.dispatch;
-                            // 在每一个 middleware 中变换 dispatch 方法。
-                            middlewares.forEach(middleware =>
-                                dispatch = middleware(store)(dispatch);
-                            )
-                        }
-
-                        applyMiddlewareSimilar(store, n1, n2)
-                        store.dispatch('EE');
-                        </code>
-                    </pre>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/mid1.png">
                 </section>
                 <section>
                     <p>Q: next和store.dispatch的区别?</p>
@@ -304,88 +215,7 @@
                     <p>request.js</p>
                 </section>
                 <section>
-                    <pre>
-        <code contenteditable style="max-height: 630px;">
-            <!--action.js-->
-            var newsList = ({newsId,url,page})=> {
-                return {
-                    types: [LOAD_NEWS_REQUEST,LOAD_NEWS_SUCCESS, LOAD_NEWS_FAILURE],
-                    callAPI: () => fetch(`http://www.test.com/${url}&page=${page}`),
-                    shouldCallAPI: (state) => {
-                    const datas = state.newsList[newsId];
-                    if (!datas) return true;
-                    if (!!datas.isFetching) return false;
-                    return true;
-                    },
-                    payload: {newsId,page}
-
-                }
-            }
-            <!-- request.js-->
-            module.exports = ({ dispatch, getState }) => next => action => {
-                const {
-                    types,
-                    callAPI,
-                    shouldCallAPI = () => true,
-                    payload = {}
-                } = action;
-
-                if (!types) {
-                    return next(action);
-                }
-                if (
-                    !Array.isArray(types) ||
-                    types.length !== 3 ||
-                    !types.every(type => typeof type === 'string')
-                ) {
-                    throw new Error('Expected an array of three string types.');
-                }
-
-                if (typeof callAPI !== 'function') {
-                    throw new Error('Expected fetch to be a function.');
-                }
-                if (!shouldCallAPI(getState())) {
-                    return;
-                }
-                const [requestType, successType, failureType] = types;
-
-                dispatch([{
-                    ...payload,
-                    type: requestType
-                    }, networkIndicator(true)])
-
-                return callAPI().then(
-                    response => {
-                        response.json().then(function(response){
-                            if (!!payload.page) {
-                            dispatch([{
-                                ...payload,
-                                type: successType,
-                                response: response,
-                                page: payload.page+1
-                            },networkIndicator(false)]);
-                            }else {
-                            dispatch([{
-                                ...payload,
-                                type: successType,
-                                response: response
-                            },networkIndicator(false)]);
-                            }
-                        });
-                    },
-                    error => {
-                        dispatch([{
-                            ...payload,
-                            type: failureType,
-                            error: error,
-                            supPayload
-                        }, networkIndicator(false)]);
-                    }
-                );
-            }
-        </code>
-                    </pre>
-                    
+                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/mid2.png"> 
                 </section>
                 <section>
                     <h2>优化</h2>
@@ -444,11 +274,35 @@
                     <h2>react-persist</h2>
                     <p>react-native: AsyncStorage</p>
                 </section>
+                <section>
+                    <pre>
+                        <code contenteditable style="max-height: none;">
+const enhancer = compose(
+  autoRehydrate(),
+);
+const store = createStore(
+  reducers,
+  {},
+  enhancer,
+);
+export default configureStore(onComplete) {
+  persistStore(store, { storage: AsyncStorage }, onComplete);
+
+  if (isDebuggingInChrome) {
+    window.store = store;
+  }
+  return store;
+}
+                        </code>
+                    </pre>
+                </section>
             </section>
             <section>
                 <section>
                     <h2>文件结构</h2>
-                    <p>记得截图</p>
+                </section>
+                <section>
+                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">
                 </section>
             </section>
             <section>
@@ -540,12 +394,19 @@ export default function* watchAccount() {
 
             <section>
                 <section>
-
-                    <h2>react的组件化思维之一HOC 或 原生相关 （选讲） </h2>
+                    <h2>react的组件化思维之一: HOC</h2>
                     <!--<p>HOC</p>-->
                 </section>
                 <section>
-                    <h2>需求</h2>
+                    <h2>组件化思维</h2>
+                    <p>pure render component</p>
+                    <p>HOC component</p>
+                    <p>render logic</p>
+                    <p>Context</p>
+                    <p>Utility Methods</p>
+                </section>
+                <section>
+                    <h2>表单验证需求</h2>
                     <div style="width: 400px; margin: 20px auto; text-align: left;">
                     <p>1. 实时验证</p>
                     <!--TODO: 显示哪个input的错误根据用户操作显示、加入后台的返回错误-->
@@ -555,12 +416,53 @@ export default function* watchAccount() {
                     </div>
                 </section>
                 <section>
+                    <h2>功能</h2>
+                    <div style="width: 400px; margin: 20px auto; text-align: left;">
+                    <p>1. input事件监听</p>
+                    <p>2. validate数据验证</p>
+                    <p>3. 表单数据处理</p>
+                    </div>
+                </section>
+                <section>
+                    <p>react-native-gifted-form、react-native-clean-form...</p>
+                    <p>mixins</p>
+                    <p>es5</p>
+                </section>
+                <section>
                     <h2>redux-form</h2>
                     <p>reduxForm</p>
                     <p>field</p>
                 </section>
+                <section>
+                    <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc1.png"/>
+                </section>
+                <section>
+                    <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc2.png"/>
+                </section>
+                <section>
+                    <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc3.png"/>
+                </section>
+                <section>
+                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc4.png"/>
+                </section>
+                <section>
+                    <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc5.png"/>
+                </section>
+                <section>
+                    <h2>hoc</h2>
+                    <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc-flow.png">
+                </section>
             </section>
-
+            <section>
+                <section>
+                    <div style="width: 400px; margin: 20px auto; text-align: left;">
+                    <p>1、链接原生库</p>
+                    <p>2、嵌入原生应用</p>
+                    <p>3、打包</p>
+                    <p>4、编译源码</p>
+                    </div>
+                </section>
+            </section>
             <section>
                 <section>
                     <h2>react-native的利弊</h2>
