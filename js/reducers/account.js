@@ -2,7 +2,7 @@
  * @Author: zengyanling
  * @Date: 2017-04-04 17:28:27
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-10 22:49:34
+ * @Last Modified time: 2017-04-16 16:30:39
  */
 import { combineReducers } from 'redux';
 import { commonRequest } from './commonHandler';
@@ -61,3 +61,5 @@ export function getLoginInfo(state) {
     username: state.account.login.username,
   };
 }
+
+

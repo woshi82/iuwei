@@ -30,7 +30,7 @@ class Input extends Component {
 					onChangeText={onChange}
 					{...restProps}
 					autoCapitalize="none"
-					placeholderTextColor="#c4c9cc"
+					// placeholderTextColor="#c4c9cc"
 					clearButtonMode="while-editing" //ios
 					underlineColorAndroid="transparent" // android 去掉文本框的边框
 				/>
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 		paddingBottom: 10,
 		paddingLeft: 10,
-		fontSize: 14,
+		fontSize: 12,
 		flex: 1,
 	},
 	close: {
@@ -79,52 +79,7 @@ const styles = StyleSheet.create({
 
 module.exports = fieldSubscription(Input);
 
-////////////////////hoc4.png
-// formSubscription
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { reduxForm } from 'redux-form';
-const formSubscription = formKey => WrappedComponent => {
-	class formCommon extends Component {
-		constructor(props){
-			super(props);
-			this.state = {
-				error: '',
-			};
-		}
-		validate = (key) => {
-      // 处理 this.state.error
-		}
-		submit = (submitFn) => {
-			if (this.validate()){
-				const { handleSubmit } = this.props;
-				// 进行表单验证
-				handleSubmit(submitFn)();
-			}
-		}
-		render() {
-			return (<WrappedComponent
-				setFormState={this.setFormState}
-				formSubmit={this.submit.bind(this)}
-				validateHandler={this.validate}
-				{...this.props}
-				{...this.state}
-			/>));
-		}
-	}
-	const connectForm = connect(
-		state => {
-			const formValidate = state.form[formKey] || {};
-			return {
-				formValidate,
-			};
-},
-	)(formCommon);
-	return reduxForm({
-		form: formKey,
-	})(connectForm);
-};
-export default formSubscription; 
+
 
 
 
