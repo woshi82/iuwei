@@ -131,9 +131,10 @@ const styles = StyleSheet.create({
 
 export default connect(
   (state) => {
+    const { account } = this,state;
     return {
-      userData: state.account.user,
-      loginData: state.account.login,
+      userData: account.user,
+      loginData: account.login,
     };
   },
   (dispatch) => {

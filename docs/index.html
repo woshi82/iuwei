@@ -89,15 +89,36 @@
                 <section>
                     <h2>react</h2>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/react.png">
-                    <!--<p>看完整的例子</p>-->
+                    <!--<p>react的是一个以数据驱动的框架，虽然声明式的渲染和至上而下的数据流相比传统模式下在性能和编码方面已经是一个很大的提升</p>-->
                 </section>
                 <section>
                     <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/react1.png">
+                </section>
+                <section>
+                    <p>state: this.state.btn</p>
+                    <p>        this.btn</p>
+                    <p>props: this.props.color </p>
+                </section>
+                <section>
+                    <p>Q: 谈谈对前端MVVM的理解?</p>
+                    <!--
+                        首先v可以理解为最终在客户端呈现的界面
+                        m 是扁平的js对象模型，react中的state最后都会存储在这么一个数据模型当中。
+                        那对于视图到模型的事件监听， 数据模型到视图的数据绑定都会在VM中进行操作
+                        我门都知道react中一个jsx 模版引擎，当数据变化的时候，在数据模型中会进行比如说diff操作、对象的observer等，来告诉模版引擎如何去编译数据模版,最后得到一个最终的string,呈现在用户视野中。
+                        当然在每一个MVVM中都会有一套事件系统，它能够让我门在视图模版中进行一些事件监听，来监听一些用户操作之类的事件， 简单快速去响应数据变化。
+                        所以mvvm是一种模型框架思维，在我们实际的编码的中，能够操作的是赋有vm一部分使命的一个一个的组件，所以组件化确实react开发中一个很重要的部分。
+                        
+                        当然在编码的细化当中也会有过滤器、helper 等等概念。
+                    -->
                     
                 </section>
                 <section>
-                    <p>Q: 怎样理解MVVM?</p>
-                    
+                    <h2>当页面变得复杂</h2>
+                    <p>数据需要共享</p>
+                    <p>页面逻辑复杂</p>
+                    <p>多状态传递</p>
+                    <p>后期维护一个文件？</p>
                 </section>
             </section>
             <section>
@@ -169,17 +190,22 @@
                                 console.log('m2 end');
                             }
                         }
-                        m1(store);
                         m2(store);
+                        m1(store);
                         store.dispatch('EE');
+
+                        结果：
+                        m1 begin > m2 begin > m1 end > m2 end
                         </code>
                     </pre>
                 </section>
                 <section>
+                    <p>传统子例程的堆栈方式：后进先出</p>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/middleware-flow.png">
                 </section>
                 <section>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/mid1.png">
+                    <!--return Object.assign({}, store, { dispatch })-->
                 </section>
                 <section>
                     <p>Q: next和store.dispatch的区别?</p>
@@ -205,6 +231,7 @@
                     <p>applyMiddleware(thunk, logger)</p>
                 </section>
                 <section>
+                    <p>const store = createStore(reducers,{},enhancer);</p>
                     <p>本质</p>
                     <p>applyMiddleware = (...middleware) => (createStore) => (reducer, preloadedState, enhancer) {}</p>
                     <p>所以</p>
@@ -229,17 +256,32 @@
             <section>
                 <section>
                     <h2>sagas</h2>
-                    <p>长事物模型，管理side-effects的途径</p>
-                    <div  style="width: 560px; margin: 0 auto; text-align: left;">
+                    <p>长事物模型，管理<span style="color: red">side-effects</span>的途径</p>
+                     <!--系统中需要协程多个action和side-effects 可以理解成与系统交互的永久线程-->
+                    <!--<div  style="width: 560px; margin: 0 auto; text-align: left;">-->
                         <!--<p>side-effects</p>
                         <p>对acion dispach事件做出反应 </p>
                         <p>dispach新的actions</p>
                         <p>在没有action被dispath的情况下能够运用内部机制进行自我苏醒</p>-->
-                    </div>
+                    <!--</div>-->
+                </section>
+                <section>
+                     <div style="width: 560px; margin: 0 auto; text-align: left;">
+                        <p>1. 对acion dispach事件做出反应 </p>
+                        <p>2. dispach新的actions</p>
+                        <p>3. 在没有action被dispath的情况下能够运用内部机制进行自我苏醒</p>
+                     </div>
+                </section>
+                 <section>
+                    <p>Q: side-effects 是什么？</p>
+                    <!--一般函数是无状态的：xx 就像react的render函数一样xx, 用户输入什么调用的时候就应该输出什么，并且不会影程序的其它部分，也就是我们说的 purefunction,但实际上我们很多函数会影响程序的状态，比如说一些异步操作，这些影响就叫做副作用-->
                 </section>
                 <section>
                     <h2>redux-saga</h2>
                     <p>saga是generator 函数</p>
+                    <!-- generator 是协程函数的一种，
+                        协程：多个线程（单线程情况下就是多个函数）并行执行，只有一个线程处于执行状态，其它线程处于暂停态，线程之间可以交换执行权（一个线程执行到一半可以暂停执行，将执行权交给另一个线程，等稍后收回执行权的时候，再恢复执行）
+                        协程是同时存在多个栈，但只有一个栈是在运行状态，也就是说，协程是以多占用内存为代价，实现多任务的并行 -->
                     <pre>
 <code>
     function* loadLogin() {
@@ -249,16 +291,16 @@
             yield put(loginSagasAc.success());
         });
     }
+
+    var loadLoginHandler = loadLogin();
+    loadLoginHandler.next();  // {value: xxx, done: false}
 </code>
                     </pre>
                 </section>
                 <section>
                     <p>做所有与state相关的异步操作, 保持视图和action creator 是纯函数</p>
                 </section>
-                <section>
-                    <p>Q: side-effects 是什么？</p>
-                    <!--一般函数是无状态的： 就像react的render函数一样，用户输入什么调用的时候就应该输出什么，并且不会影程序的其它部分，也就是我们说的 purefunction,但实际上我们很多函数会影响程序的状态，比如说一些异步操作，这些影响就叫做副作用-->
-                </section>
+               
             </section>
             <section>
                 <section>
@@ -268,12 +310,38 @@
                     <p>Provide</p>
                     <p>Connect</p>
                 </section>
+                <section>
+                        <pre>
+                    <code style="max-height: none">
+      <Provider store={this.state.store}>
+        <App />
+      </Provider>
+      // LoginSagas.js
+      connect(
+        (state) => {
+            const { account } = this,state;
+            return {
+            userData: account.user,
+            loginData: account.login,
+            };
+        },
+        (dispatch) => {
+            return {
+            loginReq: (obj) => {
+                dispatch(loginSagasAc.request(obj));
+            },
+            };
+        })(LoginSagas);
+                    </code>
+                        </pre>
+                </section>
             </section>
             <section>
                 <section>
                     <h2>react-persist</h2>
                     <p>react-native: AsyncStorage</p>
                 </section>
+                <!--存储并读取本地state的 reducer 操作-->
                 <section>
                     <pre>
                         <code contenteditable style="max-height: none;">
