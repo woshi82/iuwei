@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "mock": "supervisor mock_data/index",
+    "mock": "pm2 start mock_data/index.js -i 0 --name mock",
     "test": "jest"
   },
   "dependencies": {
@@ -26,6 +26,7 @@
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
     "body-parser": "^1.17.1",
+    "connect-multiparty": "^2.0.0",
     "eslint": "^3.19.0",
     "eslint-plugin-babel": "^4.1.1",
     "eslint-plugin-react": "^6.10.3",
