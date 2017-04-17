@@ -1,9 +1,9 @@
 var express = require('express'),
     path = require('path'),
+    multipartMiddleware = require('connect-multiparty')();
     bodyParser = require('body-parser'),
     app = express(),
     BASE_DIR = path.join(__dirname, './');
-
 app.use(bodyParser.urlencoded({ extended: false })); 
 // mock 功能
 // app.use(require('yog-devtools')({
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // }));
 
 
-app.post('/api/login', function(req, res){
+app.post('/api/login', multipartMiddleware, function(req, res){
     console.log(req.body)
     res.json({
         'status': 0,
