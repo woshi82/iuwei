@@ -2,10 +2,11 @@
  * @Author: zengyanling 
  * @Date: 2017-04-03 21:37:08 
  * @Last Modified by: zengyanling
- * @Last Modified time: 2017-04-04 22:24:37
+ * @Last Modified time: 2017-04-17 22:20:46
  */
 
-const API_ROOT = 'http://127.0.0.1:2000/api/';
+const API_ROOT = 'http://120.24.244.31:2000/api/';
+// const API_ROOT = 'http://192.168.1.101:2000/api/';
 
 
 function callApi(endpoint, postParam, method) {
@@ -17,7 +18,8 @@ function callApi(endpoint, postParam, method) {
 	// for(var name in postParam) {
 	// 	parseParams += name + '=' + postParam[name] + '&';
 	// }
-	if (method && method !== 'POST' ){
+	//   
+	if (method && method !== 'POST'){
 		for(var name in postParam) {
 			parseParams += name + '=' + postParam[name] + '&';
 		}
@@ -40,11 +42,6 @@ function callApi(endpoint, postParam, method) {
 		}
 
 		options = {
-			headers: {
-				// 'Content-Type': 'text/html; charset=utf-8',
-				// 'Content-Type': 'multipart/form-data; charset=utf-8',
-				// 'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
-			},
 			method: method || 'POST',
 			body: parseParams,
 		};
@@ -75,4 +72,4 @@ function callApi(endpoint, postParam, method) {
 		);
 }
 
-export const fetchLogin = (postParam, token) => callApi(`login?`, postParam, 'GET');
+export const fetchLogin = (postParam, token) => callApi(`login?`, postParam, 'POST');

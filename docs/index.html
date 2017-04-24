@@ -34,30 +34,13 @@
         <div class="slides">
             <section>
                 <section>
-                    <h2 id="title">用react-native构建原生应用</h2>
+                    <h2 id="title">用react-native开发原生应用</h2>
                 </section>
                 <section>
-                    <p>Q: 前端领域，还有什么框架可以构建原生应用？</p>   
-                    <!--weex ionic 性能 > 本质-->
+                    <p>Q: 前端领域，还有什么框架可以开发原生应用？(至少三种)</p>   
+                    <!--weex ionic cordova intelXDK 性能 > 本质-->
+                    <!--在用ionic编写的应用，主要是将我写的HTMl页面嵌入到webview中，实现应用端的视图渲染。然而编写的RN应用，则是通过操作RN封装的原生的API组件，然后在进行编译打包的时候会将这些编译成原生的代码，所以就本质上来说，它和原生代码已经很相近了。-->
                 </section>
-            </section>
-            <section>
-                <h3>目录</h3>
-                <div style="width: 360px; margin: 0 auto; text-align: left;">
-                    <p class="dot-left">什么是react-native</p>
-                    <!--<p class="dot-left">搭建开发环境</p>-->
-                    <p class="dot-left">实例演示</p>
-                    <p class="dot-left">构建应用的技术栈</p>
-                    <!--<p class="dot-left">一个简单的静态页面</p>  引入 简单的redux-->
-                    <p class="dot-left">文件结构</p>
-                    <!--<p class="dot-left">构建项目框架的思路</p>-->
-                    <p class="dot-left">redux数据流</p>
-                    <p class="dot-left">react的组件化思维</p>
-                    <!--<p class="dot-left">构建原生应用</p>-->
-                    <!--<p class="dot-left">react-native的利弊</p>-->
-                </div>
-            </section>
-            <section>
                 <section>
                     <h2>react-native</h2>
                     <!--TODO: 基于react构建手机应用的框架 封装了常用的手机端原生接口、组件-->
@@ -70,6 +53,34 @@
                     <h2>搭建开发环境</h2>
                     <p>http://facebook.github.io/react-native/docs</p>
                 </section>
+                
+            
+            </section>
+            <section>
+                <h3>目录</h3>
+                <div style="width: 360px; margin: 0 auto; text-align: left;">
+                    <p class="dot-left">什么是react-native</p>
+                    <!--<p class="dot-left">搭建开发环境</p>-->
+                    <p class="dot-left">文件结构</p>
+                    <p class="dot-left">实例演示</p>
+                    <p class="dot-left">开发应用的技术栈</p>
+                    <!--<p class="dot-left">一个简单的静态页面</p>  引入 简单的redux-->
+                    <!--<p class="dot-left">构建项目框架的思路</p>-->
+                    <p class="dot-left">redux数据流</p>
+                    <p class="dot-left">react的组件化思维</p>
+                    <!--<p class="dot-left">构建原生应用</p>-->
+                    <!--<p class="dot-left">react-native的利弊</p>-->
+                </div>
+            </section>
+            
+            <section>
+                <section>
+                    <h2>文件结构</h2>
+                </section>
+                <section>
+                    <img width="600" style="border: 0;margin: 0 10px;" data-src="./imgs/folder1.png">
+                    <!--<img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">-->
+                </section>
             </section>
             <section>
                 <section>
@@ -79,7 +90,7 @@
             </section>
             <section>
                 <section>
-                    <h2>构建应用的技术栈</h2>
+                    <h2>开发应用的技术栈</h2>
                 </section>
                 <section style="top: 0;">
                     <img width="550" style="border: 0;margin: 0 10px;" data-src="./imgs/tech.png">
@@ -89,18 +100,24 @@
                 <section>
                     <h2>react</h2>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/react.png">
-                    <!--<p>react的是一个以数据驱动的框架，虽然声明式的渲染和至上而下的数据流相比传统模式下在性能和编码方面已经是一个很大的提升</p>-->
+                    <!--React 是一套能轻松构建用户界面的框架。在应用中为每一个状态数据提供简单的视图,当数据变化时,React能够高效的更新并渲染相应的组件-->
+                    <!--这些组件渲染都依靠 JSX ,它是使用 XML 语法编写 Javascript 的一种语法糖。react通过在虚拟DOM中对数据进行一些预处理来减少真实DOM操作，提升性能。-->
+                    <!--<p>所以与传统模式不同的是他是声明式的渲染和至上而下的数据流，因此在编写react应用的时候你会发现都是围绕着组件进行编码。组件化编码是react很重要的部分，一个优秀的组件不仅可以使逻辑思维更加清晰、代码复用率更高、代码更加模块化，而且也有利于后期的维护。针对这个方面，react社区中也提出了很多组件化的思维，这个我们会在后面讲到。</p>-->
                 </section>
                 <section>
                     <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/react1.png">
                 </section>
                 <section>
                     <p>state: this.state.btn</p>
-                    <p>        this.btn</p>
+                    <p>        this.setState({btn: true})</p>
                     <p>props: this.props.color </p>
                 </section>
                 <section>
-                    <p>Q: 谈谈对前端MVVM的理解?</p>
+                    <img width="600" style="border: 0;margin: 0 10px;" data-src="./imgs/folder2.png">
+                    <!--<img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">-->
+                </section>
+                <!--<section>-->
+                    <!--<p>Q: 谈谈对前端MVVM的理解?</p>-->
                     <!--
                         首先v可以理解为最终在客户端呈现的界面
                         m 是扁平的js对象模型，react中的state最后都会存储在这么一个数据模型当中。
@@ -112,13 +129,14 @@
                         当然在编码的细化当中也会有过滤器、helper 等等概念。
                     -->
                     
-                </section>
+                <!--</section>-->
                 <section>
                     <h2>当页面变得复杂</h2>
-                    <p>数据需要共享</p>
                     <p>页面逻辑复杂</p>
                     <p>多状态传递</p>
+                    <p>数据需要共享</p>
                     <p>后期维护一个文件？</p>
+                    <!--增加代码复用率，各司其责，页面逻辑更佳清晰-->
                 </section>
             </section>
             <section>
@@ -128,13 +146,19 @@
                     <!-- store 只是包含一些方法的普通对象-->
                     <!-- 预设模式只有一个store： 数据变化特别频繁，应用特别庞大，redux只是其中的一个组件-->
                     <!-- TODO: middleware(例子、引入柯里化)-->
-                    <p></p>
+                    <!--<p></p>-->
                 </section>
                 <section>
                     <pre>
-                    <code contenteditable style="max-height: none;">
+                    <code contenteditable style="max-height: 650px;">
+                    <!-- store-->
+                    store = createStore(reducer)
+                    
+                    <!--root component-->
+                    <View store={store} ></View>
+
                     <!--component.js-->
-                    dispatch(loginReduxAc({
+                    store.dispatch(loginReduxAc({
                         username: this.username._lastNativeText
                         password: this.password._lastNativeText
                     }))
@@ -144,8 +168,8 @@
                     export const action = (type, payload = {}) => {
                         return { type, ...payload };
                     };
-                    <!-- reducer -->
-                    (state = {islogin: false, info: {}}, action) => {
+                    <!-- reducer index.js -->
+                    const user = (state = {islogin: false, info: {}}, action) => {
                         if (action.type === USER){
                             return {
                                 isLogin: true,
@@ -154,20 +178,32 @@
                                 }
                             }                  
                         }
+                        return state;
                     }
-                    <!-- store-->
-                    store = createStore(reducer)
+                    export default combineReducers({
+                        user,
+                        newsList: newsListFn,
+                        ...
+                    });
+
+                    <!--store树 数据结构-->
+                    store = {
+                        user: {login: false, .....}
+                    }
                     </code>
                     </pre>
                 </section>
-                
+                <section>
+                    <p>Q: pure function是什么？</p>
+                </section>
                 <section>
                     <h2>middleware</h2>
+                    <p>接收请求到产生响应的过程， 本质是hack</p>
                     <!--熟悉node express 的对middleware并不陌生： 接收请求到产生相应的过程， 本质是hack-->
                     <!-- 为什么要应用在createStore 上而不是store： 只应用middleware 一次-->
                     <!-- 为什么middleware要是链式的： 最初功能就是要作用在dispatch上， 大多数情况下我们需要为一个dispatch 注入多种mid 功能方法-->
                     <!--为什么要return dispatch 而不是直接赋值（next 和dispatch的区别）： 当在middleware 想再次dispatch 可以从头开始-->
-                    <!--确定 Priovide 原理-->
+                    
                     <!--<p>applyMiddleware接收链式middleware</p>-->
                 </section>
                 <section>
@@ -192,23 +228,25 @@
                         }
                         m2(store);
                         m1(store);
-                        store.dispatch('EE');
+                        store.dispatch({type: 'EE'});
 
                         结果：
-                        m1 begin > m2 begin > m1 end > m2 end
+                        m1 begin > m2 begin > m2 end > m1 end
                         </code>
                     </pre>
                 </section>
                 <section>
-                    <p>传统子例程的堆栈方式：后进先出</p>
+                    <p>传统子例程的堆栈方式：先进后出</p>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/middleware-flow.png">
+                    
                 </section>
                 <section>
                     <img height="650" style="border: 0;margin: 0 10px;" data-src="./imgs/mid1.png">
                     <!---->
                 </section>
                 <section>
-                    <p>Q: next和store.dispatch的区别?</p>
+                    <p>Q: 在中间件中调用next和store.dispatch的区别?</p>
+                    <!--操作会再次遍历包含当前 middleware 在内的整个 middleware 链。这对异步的 middleware 非常有用-->
                     <!--这也是 为什么在mid中是返回 dispatch 而不是给store.dispatch直接赋值的原因-->
                 </section>
                 <section>
@@ -238,6 +276,10 @@
                     <p>applyMiddleware(thunk, logger)(createStore)(reducers)</p>
                 </section>
                 <section>
+                    <img width="600" style="border: 0;margin: 0 10px;" data-src="./imgs/folder3.png">
+                    <!--<img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">-->
+                </section>
+                <section>
                     <h2>异步action</h2>
                     <p>request.js</p>
                 </section>
@@ -245,11 +287,17 @@
                     <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/mid2.png"> 
                 </section>
                 <section>
+                    <p>Q：request.js中用到了哪些es6的语法？(至少三种)</p>
+                </section>
+                <section>
+                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/mid3.png"> 
+                </section>
+                <section>
                     <h2>优化</h2>
                     <p>service API集中处理</p>
                     <p>每个fetch请求的method、header可能不同</p>
                     <p>多个请求并行</p>
-                    <p>多个请求链式</p>
+                    <p>多个请求串行</p>
                 </section>
             </section>
             <!-------------------------------------------------------------------------->
@@ -258,12 +306,6 @@
                     <h2>sagas</h2>
                     <p>长事物模型，管理<span style="color: red">side-effects</span>的途径</p>
                      <!--系统中需要协程多个action和side-effects 可以理解成与系统交互的永久线程-->
-                    <!--<div  style="width: 560px; margin: 0 auto; text-align: left;">-->
-                        <!--<p>side-effects</p>
-                        <p>对acion dispach事件做出反应 </p>
-                        <p>dispach新的actions</p>
-                        <p>在没有action被dispath的情况下能够运用内部机制进行自我苏醒</p>-->
-                    <!--</div>-->
                 </section>
                 <section>
                      <div style="width: 560px; margin: 0 auto; text-align: left;">
@@ -272,16 +314,22 @@
                         <p>3. 在没有action被dispath的情况下能够运用内部机制进行自我苏醒</p>
                      </div>
                 </section>
-                 <section>
+                 <!--<section>
                     <p>Q: side-effects 是什么？</p>
+                </section>-->
                     <!--一般函数是无状态的：xx 就像react的render函数一样xx, 用户输入什么调用的时候就应该输出什么，并且不会影程序的其它部分，也就是我们说的 purefunction,但实际上我们很多函数会影响程序的状态，比如说一些异步操作，这些影响就叫做副作用-->
-                </section>
                 <section>
                     <h2>redux-saga</h2>
                     <p>saga是generator 函数</p>
+                    <!--<p>协程函数的一种</p>-->
+                    <p>协程多个线程并行执行，只有一个线程处于执行状态，其它线程处于暂停态</p>
+                    <!--<p>以多占用内存为代价，实现多任务的并行</p>-->
                     <!-- generator 是协程函数的一种，
                         协程：多个线程（单线程情况下就是多个函数）并行执行，只有一个线程处于执行状态，其它线程处于暂停态，线程之间可以交换执行权（一个线程执行到一半可以暂停执行，将执行权交给另一个线程，等稍后收回执行权的时候，再恢复执行）
                         协程是同时存在多个栈，但只有一个栈是在运行状态，也就是说，协程是以多占用内存为代价，实现多任务的并行 -->
+                </section>
+                <!-- 在redux-saga 中对generator进行了封装，使得它能够自执行，在进行一次next 操作后，会将整个线程进行挂起，等待value的返回值，获取返回值之后执行下一个next.所以我们可以对异步操作进行一个同步化的表达。-->
+                <section>
                     <pre>
 <code>
     function* loadLogin() {
@@ -300,7 +348,10 @@
                 <section>
                     <p>做所有与state相关的异步操作, 保持视图和action creator 是纯函数</p>
                 </section>
-               
+               <section>
+                    <img width="600" style="border: 0;margin: 0 10px;" data-src="./imgs/folder4.png">
+                    <!--<img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">-->
+                </section>
             </section>
             <section>
                 <section>
@@ -365,17 +416,14 @@ export default configureStore(onComplete) {
                     </pre>
                 </section>
             </section>
-            <section>
-                <section>
-                    <h2>文件结构</h2>
-                </section>
-                <section>
-                    <img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">
-                </section>
-            </section>
+            
             <section>
                 <section>
                     <h2>redux数据流</h2>
+                </section>
+                <section>
+                    <img width="600" style="border: 0;margin: 0 10px;" data-src="./imgs/folder5.png">
+                    <!--<img height="700" style="border: 0;margin: 0 10px;" data-src="./imgs/file.png">-->
                 </section>
                 <section>
                     <img width="650" style="border: 0;margin: 0 10px;" data-src="./imgs/login-store.png">
@@ -383,7 +431,34 @@ export default configureStore(onComplete) {
                 <section>
                   <pre>
 <code  contenteditable style="max-height: 630px;">
-<!--先注入redux-->
+<!--store配置-->
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+
+const enhancer = compose(
+  autoRehydrate(),
+  applyMiddleware(sagaMiddleware, thunk, logger),
+);
+const store = createStore(
+  reducers,
+  {},
+  enhancer,
+);
+sagaMiddleware.run(rootSaga);
+
+function configureStore(onComplete) {
+  // TODO: 建议开始把redux-persist关闭，因为它会对state进行缓存，可能对于一些state对象调试不是很方便
+  persistStore(store, { storage: AsyncStorage }, onComplete);
+
+  if (isDebuggingInChrome) {
+    window.store = store;
+  }
+  return store;
+}
+<!--store注入到根组件-->
+<Provider store={this.state.store}>
+    <App />
+</Provider>
+<!--在LoginSagas组件中注入redux-->
 export default connect(
   (state) => {
     return {
@@ -434,8 +509,24 @@ componentWillReceiveProps (nextProps) {
 	success: () => action(LOGINSAGAS.SUCCESS),
 	failure: error => action(LOGINSAGAS.FAILURE, { error }),
 };
+<!-- type.js -->
+const REQUEST = 'REQUEST';
+const SUCCESS = 'SUCCESS';
+const FAILURE = 'FAILURE';
 
-<!--reducer.js-->
+function createRequestTypes(base) {
+	return [REQUEST, SUCCESS, FAILURE].reduce((acc, type) => {
+		acc[type] = `${base}_${type}`;
+		return acc;
+	}, {});
+}
+export const LOGINSAGAS = createRequestTypes('LOGINSAGAS');
+
+<!--action creater-->
+export const action = (type, payload = {}) => {
+	return { type, ...payload };
+};
+<!--account.js-->
 export default combineReducers({
 	...
 	login: commonRequest(LOGINSAGAS),
@@ -483,14 +574,14 @@ export default function* watchAccount() {
                     <p>3. 自定义配置表单验证</p>
                     </div>
                 </section>
-                <section>
+                <!--<section>
                     <h2>功能</h2>
                     <div style="width: 400px; margin: 20px auto; text-align: left;">
                     <p>1. input事件监听</p>
                     <p>2. validate数据验证</p>
                     <p>3. 表单数据处理</p>
                     </div>
-                </section>
+                </section>-->
                 <section>
                     <p>react-native-gifted-form、react-native-clean-form...</p>
                     <p>mixins</p>
@@ -502,12 +593,15 @@ export default function* watchAccount() {
                     <p>field</p>
                 </section>
                 <section>
-                    <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc1.png"/>
+                    <p>理想实现</p>
+                    <img height="600" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc1.png"/>
                 </section>
                 <section>
+                    <p>redux-form API测试</p>
                     <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc2.png"/>
                 </section>
                 <section>
+                    <p>获取表单数据</p>
                     <img width="680" style="border: 0;margin: 0 10px;" data-src="./imgs/hoc3.png"/>
                 </section>
                 <section>

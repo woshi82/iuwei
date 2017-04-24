@@ -1,20 +1,30 @@
 
+exports.aa = () => {
+	return dispatch => {
+		dispatch();
+		net.fetch.then()
+	}
+}
 
 export const commonRequest = (reducerName) => {
 	return (state = { isFetching: false }, action) => {
 		switch (action.type) {
 			case reducerName.REQUEST:
+				let params = JSON.parse(JSON.stringify(action));
+				delete params.type;
 				return {
 					...state,
 					isFetching: true,
-					...action,  // FIXME: except type
+					...params,
 				};
 			case reducerName.SUCCESS:
+				params = JSON.parse(JSON.stringify(action));
+				delete params.type;
 				return {
 					...state,
 					status: 0, // 请求成功默认为 0
 					isFetching: false,
-					...action, // FIXME: except type
+					...params,
 				};
 			case reducerName.FAILURE:
 				const error = action.error;

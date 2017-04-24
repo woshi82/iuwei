@@ -43,7 +43,7 @@ export default class Error extends Component {
 					duration: 350,
 				},
 			),
-			Animated.delay(1000),
+			Animated.delay(800),
 			timing(
 				this.state.fadeAnim,
 				{	toValue: 0,

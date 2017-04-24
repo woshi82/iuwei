@@ -19,7 +19,7 @@ function n2(store){
 				};
 		};
 }
-function applyMiddlewareSimilar(store, middlewares) {
+function applyMiddlewareSimilar(store, ...middlewares) {
 		middlewares = middlewares.slice();
 		middlewares.reverse();
 
@@ -31,7 +31,7 @@ function applyMiddlewareSimilar(store, middlewares) {
 		return Object.assign({}, store, { dispatch })
 }
 applyMiddlewareSimilar(store, n1, n2)
-store.dispatch('EE');
+store.dispatch({type: 'EE'});
 //////////// mid2.png
 // action.js
 var newsList = ({newsId,url,page})=> {

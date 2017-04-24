@@ -23,7 +23,7 @@ const logger = createLogger({
 const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
 const enhancer = compose(
-  // autoRehydrate(),
+  autoRehydrate(),
   applyMiddleware(sagaMiddleware, thunk, logger),
 );
 const store = createStore(

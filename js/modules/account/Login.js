@@ -17,13 +17,36 @@ import Error from '../../common/Error';
 
 class Login extends Component {
 	componentWillReceiveProps (nextProps) {
-    nextProps.userData.isLogin && this.props.navigator.push({
-			name: 'TabsView',
-			component: TabsView,
-      params: {
-        iTab: 1,
-      }
-		});
+    // nextProps.userData.isLogin && this.props.navigator.push({
+		// 	name: 'TabsView',
+		// 	component: TabsView,
+    //   params: {
+    //     iTab: 1,
+    //   }
+		// });
+    const { loginData, navigator, setFormState } = nextProps;
+    if (this.props.loginData.isFetching && !loginData.isFetching){
+			if (loginData.status === 0){
+				navigator.push({
+          name: 'TabsView',
+          component: TabsView,
+          params: {
+            iTab: 1,
+          }
+        });
+				// 成功
+			} else if (loginData.status == -1){
+				// 网络错误
+        setFormState({
+          error: '网络错误',
+        });
+			} else {
+				// 错误信息
+        setFormState({
+          error: loginData.message,
+        });
+			}
+		}
   }
 	loginHandler = () => {
     const { formValidate, loginReq } = this.props;
@@ -163,6 +186,7 @@ const connectLogin = connect(
   (state) => {
     return {
       userData: state.account.user,
+      loginData: state.account.login,
     };
   },
   (dispatch) => {
